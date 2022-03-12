@@ -6,7 +6,7 @@
 
 {% block content %}
       
-
+{% load crispy_forms_tags %}
 
 
 
@@ -29,7 +29,6 @@
       </div>
       {% endif %}
       <div>
-        <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Blog
           </h2>
@@ -39,7 +38,7 @@
         
       </div>
       
-      {% load tailwind_filters %}
+
       <form class="mt-8 space-y-6" method="post">
         {% csrf_token %}
         {{form | crispy}}
