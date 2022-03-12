@@ -4,7 +4,7 @@
 {% endblock title %}
 {% block content %}
 
-
+{% load crispy_forms_tags %}
 <section class="text-gray-600 body-font overflow-hidden">
     <div class="container px-5 py-10 mx-auto">
       
@@ -50,7 +50,7 @@
           </div> -->
           {% if not post.author == request.user %}
             <h1>Add a comment</h1>
-              {% load tailwind_filters %}
+
               <form method="post">
                   {% csrf_token %}
                   {{ form | crispy }}
