@@ -1,0 +1,61 @@
+{% extends 'partials/base.html' %}
+
+{% block title %}
+  login
+{% endblock title %}
+
+{% block content %}
+      
+
+
+
+
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+ 
+    <div class="max-w-md w-full space-y-8">
+      {% if messages %}
+      <div class="messages">
+          {% for message in messages %}
+          <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+            <div class="flex">
+              <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+              <div>
+                <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+      
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+      </div>
+      {% endif %}
+      <div>
+        <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Blog
+          </h2>
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Sign in to your account
+        </h2>
+        
+      </div>
+      
+      {% load tailwind_filters %}
+      <form class="mt-8 space-y-6" method="post">
+        {% csrf_token %}
+        {{form | crispy}}
+        <button class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" type="submit"><span class="absolute left-0 inset-y-0 flex items-center pl-3">
+            <!-- Heroicon name: solid/lock-closed -->
+            <svg class="h-5 w-5 text-green-500 group-hover:text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+            </svg>
+          </span>log in</button>
+          
+<div class="mb-5">
+  <a class="font-medium" href="{% url 'password_reset' %}">Forgot your password?</a>
+</div>
+          
+    </form>
+    </div>
+  </div>
+  
+  {% endblock content %}
