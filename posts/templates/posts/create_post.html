@@ -4,16 +4,22 @@
 {% endblock title %}
 {% block content %}
 {% load crispy_forms_tags %}
-<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
- 
-  <div class="max-w-md w-full space-y-8">
 
-
-    <form method="post">
+<div class="container">
+  <h2 class="text-center">Create post</h2>
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <form method="post">
         {% csrf_token %}
         {{ form | crispy }}
-        <input type="submit" class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" value="Add post">
-    </form>    
+        <button class="w-100 btn btn-lg btn-primary" type="submit">
+          Create post
+        </button>    
+      </form>    
+    </div>
   </div>
-</div>
+</div>     
+
+
+
 {% endblock content %}
