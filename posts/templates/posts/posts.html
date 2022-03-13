@@ -37,16 +37,16 @@
 
 
 
-<div class="container px-4 py-5">
-  <div class="container px-4 py-5">
+<div class="container">
+  <div class="container">
     {% if posts %}
       <h2>
         <h2 class="pb-2 border-bottom">Newest posts</h2>
       </h2>
     {% endif %}
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div class="row">
       {% for post in posts  %}
-      <div class="col d-flex align-items-start">
+      <div class="col-md-6 col-lg-4  d-flex">
 
         <div>
           <h2>{{ post.title }}</h2>

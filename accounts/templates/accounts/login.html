@@ -8,54 +8,39 @@
       
 {% load crispy_forms_tags %}
 
-
-
-
- 
-    <div>
-      {% if messages %}
-      <div class="messages">
-          {% for message in messages %}
-          <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
-            <div class="flex">
-              <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
-              <div>
-                <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
-      
+{% comment %} todo: center messages {% endcomment %}
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+      <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+        <div class="flex">
+          <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+            <div>
+              <div 
+                {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}
               </div>
             </div>
           </div>
-          {% endfor %}
+        </div>
       </div>
-      {% endif %}
-      <div>
-    </div>
+    {% endfor %}
+</div>
+{% endif %}
 
-    <div class="container w-50">
-      <div class="mx-auto text-center">
-        <h2>
-          Blog
-        </h2>
-        <h2>
-          Sign in to your account
-        </h2>
-      </div>
-      <form method="post">
-        {% csrf_token %}
-        {{form | crispy}}
-          <button type="submit"><span class="absolute left-0 inset-y-0 flex items-center pl-3">
-              <!-- Heroicon name: solid/lock-closed -->
-              <svg class="h-5 w-5 text-green-500 group-hover:text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-              </svg>
-            </span>log in
-          </button>
-          
-          <div class="mb-5">
-            <a class="font-medium" href="{% url 'password_reset' %}">Forgot your password?</a>
-          </div>
-          
-        </form>
-      </div>
-    </div>
-  {% endblock content %}
+
+<div class="container">
+  <h2 class="text-center">Login</h2>
+  <div class="row">
+    <div class="col-md-6 offset-md-3"><form method="post">
+      {% csrf_token %}
+      {{form | crispy}}
+        <button class="w-100 btn btn-lg btn-primary"" type="submit">
+          login
+        </button>
+        <div class="mb-5">
+          <a href="{% url 'password_reset' %}">Forgot your password?</a>
+        </div> 
+    </form></div>
+  </div>
+</div>
+{% endblock content %}
