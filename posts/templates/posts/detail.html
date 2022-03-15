@@ -1,10 +1,10 @@
 {% extends "partials/base.html" %}
 {% block title %}
-  Post detail | {{ post.title }}
+  {{ post.title }}
 {% endblock title %}
 {% block content %}
-
 {% load crispy_forms_tags %}
+{% comment %} messages {% endcomment %}
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
@@ -16,117 +16,46 @@
   </div>
 </div>
 
-          <h1>{{ post.title }}</h1>
-          <div>
-            <a>Details</a>
-            {% if post.author == request.user %}
-              <a href="{% url 'update_post' post.id %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Update</a>
-              <a href="{% url 'delete' post.id %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Delete</a>
-            {% endif %}
-          </div>
-          <p>{{ post.content }}</p>
-
-          {% if not post.author == request.user %}
-            <h1>Add a comment</h1>
-
-              <form method="post">
-                  {% csrf_token %}
-                  {{ form | crispy }}
-                  <button type="submit" class="btn btn-primary">Add comment</button>
-              </form>
-          {% endif %}
+<h1>{{ post.title }}</h1>
+<p>{{ post.content }}</p>
+<div>
+  {% if post.author == request.user %}
+    <a href="{% url 'update_post' post.id %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Update post</a>
+    <a href="{% url 'delete' post.id %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Delete post</a>
+  {% endif %}
+</div>
 
 
-
-<hr>
-
-
-
-        <h2>
-          Comments
-        </h2>
-
-              <table>
-                
-                  
-                
-                <thead>
-                  <tr>
-                    <th scope="col">
-                    Commented by:
-                    </th>
-                    <th scope="col">
-                      Comment
-                    </th>
-                    
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for post_comment in post.comments  %}
-                   
-                  
-                  <tr>
-                    <td>
-                      <div>
-                        <div>
-                        </div>
-                        <div>
-                          <div>
-                            {{ post_comment.user.first_name }} {{ post_comment.user.last_name }}
-                          </div>
-                          {% if post_comment.user.email %}
-                          {{ post_comment.user.email }}
-                          {% endif %}
-                          <div class="text-sm text-gray-500">
-                            
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class=">
-                      <div>{{ post_comment.content }}</div>
-                    </td>
-                    {% if post_comment.user == request.user or post.author == request.user %}
-                      <td>
-                        <a href="{% url 'delete_comment' post_comment.id %}" class="bg-red-500 hover:bg-red-700 text-white text-center py-2 px-4 rounded" >Delete</a>
-                      </td>
-                    {% endif %}
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <hr>
-              
+{% if not post.author == request.user %}
+  <h1>Add a comment</h1>
+  <form method="post">
+      {% csrf_token %}
+      {{ form | crispy }}
+      <button type="submit" class="btn btn-primary">Add comment</button>
+  </form>
+{% endif %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Commented by:</th>
+      <th scope="col">Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for post_comment in post.comments  %}
+    <tr>
+      <td>{{ post_comment.user.username }}</td>
+      <td>{{ post_comment.content }}</td>
+      {% if post_comment.user == request.user or post.author == request.user %}
+        <td>
+          <a class="btn btn-danger" href="{% url 'delete_comment' post_comment.id %}"  >Delete</a>
+        </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+    
+  </tbody>
+</table>             
 {% endblock content %}
 
 

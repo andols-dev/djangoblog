@@ -16,7 +16,7 @@
       <form method="post">
         {% csrf_token %}
         Are you sure want to delete this item ?
-        <button type="submit" class="btn btn-primary" >Yes</button>
+        <button type="submit" class="btn btn-danger" >Yes</button>
         <a  href="{% url 'posts'  %}" class="bg-yellow-500 hover:bg-yellow-700 text-white text-center py-2 px-4 rounded">Cancel </a>
     </form>               
     </div>

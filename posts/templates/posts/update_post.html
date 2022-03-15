@@ -8,7 +8,7 @@
   <h2 class="text-center">Update</h2>
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <a href="{% url 'details' post.id %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Details</a>
+      <a href="{% url 'details' post.id %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Back to post</a>
       {% if post.author == request.user %}
         <a href="{% url 'update_post' post.id %}" class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">Update</a>
         <a href="{% url 'delete' post.id %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Delete</a>
