@@ -50,7 +50,7 @@
   <div class="container">
     {% if posts %}
       <h2>
-        <h2 class="pb-2 border-bottom">Newest posts</h2>
+        <h2 class="pb-2">Newest posts</h2>
       </h2>
     {% endif %}
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -65,7 +65,7 @@
                
                {% if user.is_authenticated %}
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Read post</button>
+                  <a href="{% url 'details' post.id %}" type="button" class="btn btn-sm btn-outline-secondary">Read post</a>
                 </div>
                 {% endif %}
                 <small class="text-muted">Posted by: {{ post.author }} <img style="width: 45px;height: 45px;" class="rounded-circle" src="{{ post.author.profile.image.url }}" alt=""></small><br>
@@ -78,7 +78,7 @@
     </div>
   </div>
 </div>
-<hr>
+
 
 
 
