@@ -5,7 +5,74 @@
 {% endblock title %}
     
 {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+      {{ message }}
+    </div>
+    {% endfor %}
+  </div>
+</div>
 {% comment %} My posts {% endcomment %}
+<div class="container">
+  <div class="row text-center">
+    <div class="col-md-4">Comments: {{ comments_count }}  Posts: {{ post_count }}</div>
+    <div class="col-md-4">
+      <img style="width: 45px;height: 45px;" class="rounded-circle" src="{{ user.profile.image.url }}">
+      <div>
+      <a class="" href="{{ user.profile.image_attribution }}"> 
+        {% if user.profile.image_attribution_name %}
+        Photo by: {{ user.profile.image_attribution_name }}
+        {% endif %}   
+       </a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <a class="btn btn-md btn-primary" href="{% url 'update-profile' %}">update</a>
+    </div>
+  </div>
+</div>
+
+<hr>
+<div class="container text-center">
+  <h1 class="mt-10 text-4xl font-medium text-gray-700">
+    {% if user.first_name and user.last_name %}
+      {{ user.first_name }} {{ user.last_name }}
+      {% else %}
+      {{user.username}} 
+    {% endif %}
+    {% if user.profile.age %}
+    <span class="font-light text-gray-500">{{ user.profile.age }}</span>
+    {% endif %}
+  </h1>
+  {% if user.profile.city %}
+  <p class="font-light text-gray-600 mt-3">{{ user.profile.city }}</p>
+
+  {% endif %}
+
+  {% if user.profile.occupation %}
+  <p class="mt-8 text-gray-500">{{ user.profile.occupation }}</p>
+  {% endif %}
+  {% if user.profile.degree %}
+  <p class="mt-2 text-gray-500">{{ user.profile.degree }}</p>
+  {% endif %}
+  
+  <p>     
+    {% if user.first_name and user.last_name %}
+    My name is
+      {{ user.first_name }} {{ user.last_name }}.
+    {% endif %}
+    {% if user.profile.age %}
+    I'am {{ user.profile.age }} years old.
+    {% endif %}
+     {{ user.profile.about }}
+  </p>
+    
+</div>
+
+{% if posts %}
 <div class="album py-5">
   <div class="container">
     {% if posts %}
@@ -38,6 +105,9 @@
     </div>
   </div>
 </div>
+{% else %}
+<h2 class="d-flex justify-content-center">You have not created any posts</h2>
+{% endif %}
 
 
 
@@ -134,6 +204,11 @@
 <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
  
   <div> {% endcomment %}
+    
+{% if posts %}
+  
+
+      
 <div class="d-flex justify-content-center">
   <nav aria-label="...">
     <ul class="pagination">
@@ -165,106 +240,70 @@
     </ul>
   </nav>
 </div>
+{% endif %}
 
+{% if comments %}
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">My comment</th>
+        <th scope="col">Blog post created by:</th>
+        <th scope="col">Blog post:</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for comment in comments  %}
+      <tr>
+        <td>{{ comment.post.title }}</td>
+        <td>{{ comment.post.author }}</td>
+        <td><a href="{% url 'details' comment.post.id %}">
+          {{ comment.post.title }} 
+        </a></td>
 
-
-
-
-</div>
-</div>
-</div>
-
-<section class="mt-5 text-gray-600 body-font">
-  <div class="container px-5 mx-auto">
-    {% if comments %}
-    
-    <h2 class="mb-5 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-      My comments
-    </h2>
-    {% endif %}
-    
-    <div class="flex flex-wrap -m-4">
-     {% for comment in comments  %}
-     
-     
-      <div class="p-4 lg:w-1/3">
-        
-        <div class="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
-          <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">{{ comment.title }}</h1>
-          <p class="leading-relaxed mb-3">My comment:{{ comment.content |truncatechars:37 }}</p>
-
-          
-          <div class="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full py-4">
-
-            <a href="{% url 'details' comment.post.id %}" class="text-gray-400 mr-3 inline-flex items-center leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-              Blog post:{{ comment.post.title }} 
-            </a>
-
-            <span class="text-gray-400 inline-flex items-center leading-none text-sm mr-2">
-              Blog post created by:{{ comment.post.author }}
-            </span>
-
-
-          </div>
-        </div>
-      </div>
-      {% empty %}
-      
-        
-    <div class="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-      <div class="flex items-center justify-center w-12 bg-blue-500">
-          <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z"/>
-          </svg>
-      </div>
-      
-      <div class="px-4 py-2 -mx-3">
-          <div class="mx-3">
-              <span class="font-semibold text-blue-500 dark:text-blue-400">Info</span>
-              <p class="text-sm text-gray-600 dark:text-gray-200">No comments have been added.</p>
-          </div>
-      </div>
-  </div>
-      
+      </tr>
       {% endfor %}
-    </div>
-  </div>
-</section>
+      
+    </tbody>
+  </table>
+</div>
+<hr>
+<div class="d-flex justify-content-center">
+  <nav aria-label="...">
+    <ul class="pagination">
+      {% if comments.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page2={{ comments.previous_page_number }}" class="">
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+      {% endif %}
 
-<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
- 
-  <div>
-<div class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
-{% if comments.has_previous %}
- <a href="?page2={{ comments.previous_page_number }}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-  <span class="sr-only">Previous</span>
-  <!-- Heroicon name: solid/chevron-left -->
-  <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-  </svg>
-</a>
+      {% for i in comments.paginator.page_range %}
+          {% if comments.number == i %}
+            <li class="page-item active" aria-current="page">
+              <span class="page-link">{{ i }}</span>
+            </li>
+          {% else %}
+            <li class="page-item"><a class="page-link" <a href="?page2={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+
+        {% if comments.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page2={{ comments.next_page_number }}">Next</a>
+          </li>
+        {% endif %}
+      
+    </ul>
+  </nav>
+</div>
+
+{% else %}
+  <h2 class="d-flex justify-content-center">You have not created any comments</h2>
 {% endif %}
 
-{% for i in comments.paginator.page_range %}
-  {% if comments.number == i %}
-    <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">{{ i }} </a>
-  {% else %}
-    <a href="?page2={{ i }}" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">{{ i }}</a>
-  {% endif %}
-{% endfor %}
-
-{% if comments.has_next %}
-  <a href="?page2={{ comments.next_page_number }}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-    <span class="sr-only">Next</span>
-    <!-- Heroicon name: solid/chevron-right -->
-    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-    </svg>
-  </a>
-{% endif %}
-</div>
-</div>
-</div>
 
 
 {% endblock content %}

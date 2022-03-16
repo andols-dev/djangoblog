@@ -3,15 +3,14 @@
   update profile
 {% endblock title %}
 {% block content %}
-<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
- 
-  <div class="max-w-md w-full space-y-8">
-    {% load tailwind_filters %}
+{% load crispy_forms_tags %}
+<div>
+  <div>
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       {{ updateUserForm|crispy }}
       {{ updateProfileForm|crispy }}
-      <input type="submit" class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" value="Update">
+      <input type="submit" class="w-100 btn btn-lg btn-primary" value="Update">
     </form>
   </div>
 </div>
