@@ -22,7 +22,8 @@ I have created a Blog using Django and Bootstrap 5.The blog has an authenticatio
 ![2022-03-17 18 12 58 127 0 0 1 ae1b23c46317](https://user-images.githubusercontent.com/60063451/158856782-ddaaf724-0403-4fbd-aba4-69a623805788.jpg)
 
 ### Sign up page:
-![2022-03-17 18 19 16 127 0 0 1 bedf8be244b5](https://user-images.githubusercontent.com/60063451/158857856-95c3cfa5-a836-410d-b7be-091315463900.jpg)
+
+![2022-03-17 18 23 23 127 0 0 1 86e87fc4f069](https://user-images.githubusercontent.com/60063451/158858737-fd1b8020-943c-4ba6-92f6-b7885c0213c8.jpg)
 
 ### Login page:
 
