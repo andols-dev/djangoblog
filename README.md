@@ -17,8 +17,8 @@ I have created a Blog using Django and Bootstrap 5.The blog has an authenticatio
 
 ### Blog start page
 
-***
+
 
 ![2022-03-17 18 12 58 127 0 0 1 ae1b23c46317](https://user-images.githubusercontent.com/60063451/158856782-ddaaf724-0403-4fbd-aba4-69a623805788.jpg)
 
-***
+
