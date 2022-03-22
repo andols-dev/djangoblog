@@ -56,17 +56,15 @@ A message will be shown if no posts have been added.
 ***
 When creating a user, a user profile will be created automatically using signals.
 ***
-
-***
-Pagination
-***
 ``` python
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, *args, **kwargs):
     if created:
         Profile.objects.create(user=instance)
  ```
-
+***
+Pagination
+***
 ``` python
 {% if posts %}
         <div class="d-flex justify-content-center">
