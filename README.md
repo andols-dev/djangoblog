@@ -39,6 +39,17 @@ A message will be shown if no posts have been added.
 ### A redirection will be made to login page after a visitor has registered as a user. A message will be shown on the login page that a user was registered. From here the newly registered user can login in to the blog.
 
 ***
+``` python
+{% if messages %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            {% for message in messages %}<div class="alert alert-success" role="alert">{{ message }}</div>{% endfor %}
+        </div>
+    </div>
+  </div>
+{% endif %}
+```
 
 ![2022-03-22 18 19 50 127 0 0 1 a8da3c7ef339](https://user-images.githubusercontent.com/60063451/159538955-65fd5133-cdea-430b-850b-854a90459db3.jpg)
 
