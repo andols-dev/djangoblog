@@ -57,6 +57,9 @@ A message will be shown if no posts have been added.
 When creating a user, a user profile will be created automatically using signals.
 ***
 
+***
+Pagination
+***
 ``` python
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, *args, **kwargs):
@@ -64,4 +67,38 @@ def create_profile(sender, instance, created, *args, **kwargs):
         Profile.objects.create(user=instance)
  ```
 
-
+``` python
+{% if posts %}
+        <div class="d-flex justify-content-center">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    {% if posts.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="?page={{ posts.previous_page_number }}"
+                               class="">
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% for i in posts.paginator.page_range %}
+                        {% if posts.number == i %}
+                            <li class="page-item active" aria-current="page">
+                                <span class="page-link">{{ i }}</span>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if posts.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ posts.next_page_number }}">Next</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    {% endif %}
+```
