@@ -1,6 +1,6 @@
 # Blog
 
-I have created a Blog using Django and Bootstrap 5.The blog has an authentication system and a visitor need to create a login username and password in order to visit the blog and make posts.
+I have created a Blog using Django and Bootstrap 5.The blog has an authentication system and a visitor needs to create a login username and password in order to visit the blog and make posts.
 
 ### Features
 
