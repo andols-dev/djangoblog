@@ -53,3 +53,15 @@ A message will be shown if no posts have been added.
 
 ![2022-03-22 18 19 50 127 0 0 1 a8da3c7ef339](https://user-images.githubusercontent.com/60063451/159538955-65fd5133-cdea-430b-850b-854a90459db3.jpg)
 
+***
+When creating a user, a user profile will be created automatically using signals.
+***
+
+``` python
+@receiver(post_save, sender=User)
+def create_profile(sender, instance, created, *args, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+ ```
+
+
