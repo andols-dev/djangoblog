@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=50)
@@ -10,6 +11,8 @@ class Post(models.Model):
     def comments(self):
         return self.comment_set.all()
     
+    def get_absolute_url(self):
+        return reverse("details", kwargs={"id": self.id})
     
 
     def __str__(self):
