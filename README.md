@@ -50,8 +50,8 @@ A message will be shown if no posts have been added.
   </div>
 {% endif %}
 ```
+![2022-03-23 16 49 26 127 0 0 1 fe30da50683c](https://user-images.githubusercontent.com/60063451/159740403-15ecbbc3-3f71-4b9e-a9e2-d3db68351332.jpg)
 
-![2022-03-22 18 19 50 127 0 0 1 a8da3c7ef339](https://user-images.githubusercontent.com/60063451/159538955-65fd5133-cdea-430b-850b-854a90459db3.jpg)
 
 ***
 When creating a user, a user profile will be created automatically using signals.
