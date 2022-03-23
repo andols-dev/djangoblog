@@ -14,6 +14,8 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    class Meta:
+        ordering = ['-date']
 
 class Comment(models.Model):
     content = models.CharField(verbose_name="comment", max_length=50)

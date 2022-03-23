@@ -15,7 +15,7 @@ def posts_view(request):
         query = request.GET['query']
         all_Posts = Post.objects.filter(title__icontains=query)
     else:
-        all_Posts = Post.objects.all().order_by('-date')
+        all_Posts = Post.objects.all()
 
     page_num = request.GET.get('page', 1)
     paginator = Paginator(all_Posts, 6) # 6 employees per page
