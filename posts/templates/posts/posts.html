@@ -73,7 +73,7 @@
                                     <div class="">
                                         {% if user.is_authenticated %}
                                             <div class="btn-group">
-                                                <a href="{% url 'details' post.id %}"
+                                                <a href="{{ post.get_absolute_url }}"
                                                    type="button"
                                                    class="btn btn-sm btn-outline-secondary">Read post</a>
                                             </div>
